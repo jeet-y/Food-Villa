@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import RestaurantCard from './RestaurantCard'
+import Shimmer from './Shimmer';
 
 
 function filterData(searchText, allRestaurents) {
@@ -26,18 +27,20 @@ const Body = (props) => {
         setAllFilteredRestaurents(filterRestaurants)
     }, [props.searchText])
     return (
-        (allFilteredRestaurents.length === 0) ? <h1 className='loading-popUp'>Restaurent are loading...</h1> :
-            (<div className='container'>
-                <div className='container-center'>
-                    <div className='restaurant-list'>
-                        {
-                            allFilteredRestaurents.map(restaurant => {
-                                return <RestaurantCard {...restaurant?.data} key={restaurant.data.id} />
-                            })
-                        }
+
+        (allFilteredRestaurents.length === 0) ? <Shimmer /> :
+            (
+                <div className='container'>
+                    <div className='container-center'>
+                        <div className='restaurant-list'>
+                            {
+                                allFilteredRestaurents.map(restaurant => {
+                                    return <RestaurantCard {...restaurant?.data} key={restaurant.data.id} />
+                                })
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
             )
     )
 }

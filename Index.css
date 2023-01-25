@@ -10,24 +10,32 @@ body{
 }
 
 #logo{
-    height:90px;
-    margin-left: 26.5em;
+    height:70px;
+    /* margin-left: 26.5em; */
 }
 
 .header{
     width: 100%;
+    height: 80px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     box-shadow: 0 10px 50px rgb(234, 231, 231);
     background-color: white;
     position: fixed;
     z-index: 10;
 }
 
+.header-inner{
+    width: 80%;
+    max-width: 1220px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .search-box{
     width: 300px;
-    height: 100%;
-    line-height: 90px;
 }
 .search-bar{
     width: 45%;
@@ -58,19 +66,20 @@ body{
 } */
 .nav-items-list{
     display: flex;
-    margin-right: 25em;
+    /* margin-right: 25em; */
     list-style: none;
 }
 
 .nav-items-list li{
-    padding-left: 30px;
-    line-height: 90px;
     font-size: 1.1rem;
     width: 100px;
+    height: 27px;
+    text-align: center;
+    color: #242424;
 }
 
 .nav-items-list li:hover{
-    color:red;
+    color:#f73b00;
     opacity: 0.8;
     font-size: 1.2rem;
     transition: 0.3s;
@@ -98,6 +107,7 @@ body{
 }
 .restaurant-card h3{
     margin: 12px 0px 5px;
+    color: #242424;
 }
 .restaurant-card p{
     color:gray;
@@ -140,3 +150,29 @@ body{
     position: relative;
     top: 120px;
 }
+
+.shimmer-ui{
+    width: calc(25% - 60px);
+    height: 320px;
+    min-width: 100px;
+    margin: 30px;
+    background-color: lightgray;
+    opacity: 0.5;
+    animation: fadeInOut 0.5 ease-in-out 0.1s infinite alternate;
+}
+
+.footer{
+    background-color: #242424;
+    color: white;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0;}
+    100% {opacity: 0.5;}
+}
+

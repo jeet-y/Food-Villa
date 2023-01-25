@@ -1,9 +1,10 @@
 import { useState } from "react"
+import Logo from "../assets/Img/logo.png"
 
 const Title = () => {
     return (
-        <img id="logo" src="https://lh5.googleusercontent.com/p/AF1QipOhHeCaQ6Xb6RVf3R_ZBTbDK4FIug_203rKsHLT" alt="logo" />
-        // <img id="logo" src="../assets/Img/logo.png" alt="logo" />
+        // <img id="logo" src="https://lh5.googleusercontent.com/p/AF1QipOhHeCaQ6Xb6RVf3R_ZBTbDK4FIug_203rKsHLT" alt="logo" />
+        <img id="logo" src={Logo} alt="logo" />
     )
 }
 
@@ -21,8 +22,8 @@ export function useSearch() {
 
 const Header = (props) => {
     return (
-        <>
-            <div className="header">
+        <div className="header">
+            <div className="header-inner">
                 <Title />
                 {props.searchBox}
                 <ul className="nav-items-list">
@@ -31,9 +32,8 @@ const Header = (props) => {
                     <li>Contact</li>
                     <li>Cart</li>
                 </ul>
-
             </div>
-        </>
+        </div>
     )
 }
 
