@@ -6,24 +6,56 @@
 }
 
 body{
-    background-color:rgb(247, 242, 242);
+    background-color:#fff;
 }
 
 #logo{
     height:90px;
-    margin-left: 25em;
+    margin-left: 26.5em;
 }
 
 .header{
     width: 100%;
     display: flex;
     justify-content: space-between;
-    /* border: 0.8px solid gray; */
     box-shadow: 0 10px 50px rgb(234, 231, 231);
     background-color: white;
     position: fixed;
     z-index: 10;
 }
+
+.search-box{
+    width: 300px;
+    height: 100%;
+    line-height: 90px;
+}
+.search-bar{
+    width: 45%;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom-width: 1px;
+    outline: none;
+    border-bottom-left-radius: 2px;
+    border-color: lightgray;
+    color: gray;
+}
+.search-bar:hover{
+    width: 80%;
+    list-style: none;
+    transition: 0.4s;
+}
+.search-bar:focus{
+    width: 80%;
+}
+/* .search-btn{
+    width: 80px; 
+    margin-left: 5px;
+    font-size: 13px;
+    color: white;
+    background: #242424;
+    border-radius: 10px;
+} */
 .nav-items-list{
     display: flex;
     margin-right: 25em;
@@ -31,7 +63,7 @@ body{
 }
 
 .nav-items-list li{
-    padding-right: 30px;
+    padding-left: 30px;
     line-height: 90px;
     font-size: 1.1rem;
     width: 100px;
@@ -47,36 +79,53 @@ body{
     display: flex;
     justify-content: center;
 }
+.container-center{
+    width: 61.5%;
+    margin-top: 90px;
+}
 .restaurant-list{
-    width: 73%;
+    width: 100%;
+    /* justify-content: center; */
     font-size: 0.8rem;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 90px;
 }
-
 .restaurant-card{
-    max-width: 270px;
+    width: calc(25% - 40px);
+    min-width: 100px;
     margin: 20px;
     padding: 10px 10px 40px 10px;
 }
+.restaurant-card h3{
+    margin: 12px 0px 5px;
+}
+.restaurant-card p{
+    color:gray;
+}
 .restaurant-card:hover{
-    border: 0.5px solid gray;
-    box-shadow: 3px 3px 40px;
+    /* border: 0.001px solid; */
+    box-shadow: 0px 1px 3px gray;
     opacity: 0.85;
-    transition: 0.3s;
+    transition: 0.25s;
 }
 .restaurant-card > img{
     max-width: 100%;
 }
-
+.restaurant-card > hr{
+    border:0.1 solid lightgray
+}
+.discountText{
+    margin-top: 10px;
+    color:#8a584b !important
+}
 .extraInfo{
     height: 20px;
     display: flex;
+    color: gray;
     justify-content: space-between;
+    margin-top: 18px;
+    margin-bottom:12px
 }
-
 .extraInfo >:first-child{
     background-color: #48c479;
     color: white; 
@@ -85,4 +134,9 @@ body{
 
 .extraInfo > label{
     line-height: 20px;
+}
+
+.loading-popUp{
+    position: relative;
+    top: 120px;
 }
