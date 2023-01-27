@@ -1,22 +1,11 @@
 const Shimmer = () => {
     return (
-        <div className='container'>
-            <div className='container-center'>
-                <div className='restaurant-list'>
-                    <div className="shimmer-ui"></div>
-                    <div className="shimmer-ui"></div>
-                    <div className="shimmer-ui"></div>
-                    <div className="shimmer-ui"></div>
-                    <div className="shimmer-ui"></div>
-                    <div className="shimmer-ui"></div>
-                    <div className="shimmer-ui"></div>
-                    <div className="shimmer-ui"></div>
-                    <div className="shimmer-ui"></div>
-                    <div className="shimmer-ui"></div>
-                    <div className="shimmer-ui"></div>
-                    <div className="shimmer-ui"></div>
-                    <div className="shimmer-ui"></div>
-                </div>
+        <div>
+            <div className="search-box">
+                <input className="search-bar" placeholder="search" />
+            </div>
+            <div className='restaurant-list'>
+                {Array(15).fill("").map((e, index) => (<div key={index} className="shimmer-card"></div>))}
             </div>
         </div>
     )

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Logo from "../assets/Img/logo.png"
+import { Link } from "react-router-dom"
 
 const Title = () => {
     return (
@@ -8,29 +9,17 @@ const Title = () => {
     )
 }
 
-export function useSearch() {
-    const [searchText, setSearchText] = useState("");
-    return {
-        searchText,
-        searchBox: (
-            <div className="search-box">
-                <input className="search-bar" onChange={e => { setSearchText(e.target.value) }} placeholder="search" />
-            </div>
-        )
-    }
-}
 
-const Header = (props) => {
+const Header = ({ setSearchMsg }) => {
     return (
         <div className="header">
             <div className="header-inner">
                 <Title />
-                {props.searchBox}
                 <ul className="nav-items-list">
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact</li>
-                    <li>Cart</li>
+                    <Link className="link" to='/'>Home</Link>
+                    <Link className="link" to='/about'>About</Link>
+                    <Link className="link" to='/contact'>Contact</Link>
+                    <Link className="link" to='/'>Cart</Link>
                 </ul>
             </div>
         </div>
