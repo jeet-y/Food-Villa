@@ -13,12 +13,8 @@ const AppLayout = () => {
     return (
         <div>
             <Header />
-            <div className='container'>
-                <div className='container-center'>
-                    <Outlet />
-                </div>
-            </div>
-            <Footer />
+            <Outlet />
+            {/* <Footer /> */}
         </div >
     )
 }

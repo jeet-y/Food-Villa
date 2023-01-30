@@ -10,7 +10,7 @@ const Title = () => {
 }
 
 
-const Header = ({ setSearchMsg }) => {
+const Header = () => {
     return (
         <div className="header">
             <div className="header-inner">

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "food delivery app",
   "scripts": {
-    "start": "parcel start",
+    "start": "parcel index.html",
     "test": "jest"
   },
   "author": "Jitendra yadav",
