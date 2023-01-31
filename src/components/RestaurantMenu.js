@@ -18,7 +18,7 @@ const RestaurantMenu = () => {
     return (
         (!restaurant) ? <h1>Restaurant Loading...</h1>
             : (
-                <div>
+                <div className={rm.container}>
                     <div className={rm.selected_restaurant}>
                         <div className={rm.selected_restaurant_center}>
                             <img src={Img_Restaurant_URL + restaurant?.cloudinaryImageId} />
@@ -48,17 +48,16 @@ const RestaurantMenu = () => {
                     </div>
                     <div className={rm.restaurant_menu}>
                         <div className={rm.restaurant_menu_center}>
-                            {/* <h3>Recommended</h3> */}
-                            {console.log(restaurant)}
+                            {/* {console.log(restaurant)} */}
                             {Object.values(restaurant?.menu?.items).map((item) =>
                                 (!item.cloudinaryImageId) ? '' :
                                     (
-                                        <div className={rm.menu_list} key={item.id} >
+                                        <div className={rm.menu_list} key={item?.id} >
                                             <div className={rm.menu_list_item}>
                                                 <div className={rm.menu_list_item_info}>
-                                                    <p className={rm.menu_item_name}>{item.name}</p>
-                                                    <p className={rm.menu_item_price}><span>&#8377;</span> {item.price}</p>
-                                                    <p className={rm.menu_item_description}>{item.description}</p>
+                                                    <p className={rm.menu_item_name}>{item?.name}</p>
+                                                    <p className={rm.menu_item_price}><span>&#8377;</span> {Math.round(item?.price / 100).toString()}</p>
+                                                    <p className={rm.menu_item_description}>{item?.description}</p>
                                                 </div>
                                                 <img src={Img_Restaurant_URL + item?.cloudinaryImageId} />
                                             </div>
