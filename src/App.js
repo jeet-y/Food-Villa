@@ -1,19 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Header from './src/components/Header'
-import About from './src/components/About'
-import Contact from './src/components/Contact'
-import Body from './src/components/Body'
-import Footer from './src/components/Footer'
-import Error from './src/components/Error'
-import RestaurantMenu from './src/components/RestaurantMenu'
+import Header from './components/Header'
+import About from './components/About'
+import Contact from './components/Contact'
+import Body from './components/Body'
+import Footer from './components/Footer'
+import Error from './components/Error'
+import RestaurantMenu from './components/RestaurantMenu'
+import Instamart from './components/Instamart'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 
 const AppLayout = () => {
     return (
         <div>
             <Header />
-            <Outlet />
+            <div className="w-full full-height flex justify-center">
+                <div className="w-3/4 xl:w-3/4 xl:px-16 2xl:w-2/3 px-8 full-height">
+                    <Outlet />
+                </div>
+            </div>
             <Footer />
         </div >
     )
@@ -40,6 +45,11 @@ const BrowserRouter = createBrowserRouter([
             {
                 path: "/restaurant/:restaurantId",
                 element: <RestaurantMenu />
+            }
+            ,
+            {
+                path: "/Instamart",
+                element: <Instamart />
             }
         ]
     },

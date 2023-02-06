@@ -1,12 +1,6 @@
 const About = () => {
     return (
-        <div className='container'>
-            <div className='container-center'>
-                <div className='restaurant-list'>
-                    <h1>About Page</h1>
-                </div>
-            </div>
-        </div>
+        <h1 className="mt-10 font-bold text-xl">About Page</h1>
     )
 }
 

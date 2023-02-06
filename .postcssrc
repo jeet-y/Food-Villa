@@ -1,0 +1,7 @@
+// this file is used to ask parcel(bundler) to compile the tailwindcss while bundling the production build.
+
+{
+    "plugins": {
+        "tailwindcss": { }
+    }
+}

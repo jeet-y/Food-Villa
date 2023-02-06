@@ -1,7 +1,7 @@
 const Search = ({ setText }) => {
     return (
-        <div className="search-box">
-            <input className="search-bar" onChange={e => setText(e.target.value)} placeholder="search" />
+        <div className="text-right mr-4">
+            <input className="outline-none border-b-[0.5px] border-gray-300" onChange={e => setText(e.target.value)} placeholder="search" />
         </div>
     )
 }

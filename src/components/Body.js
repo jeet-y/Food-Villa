@@ -18,10 +18,6 @@ const Body = () => {
         setSearchText(text)
     }
 
-    // const restaurantCardClicked = () => {
-    //     console.log('restaurant card clicked')
-    // }
-
     async function getAllRestaurents() {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9783692&lng=77.6408356&page_type=DESKTOP_WEB_LISTING");
         const json = await data?.json();
@@ -38,30 +34,27 @@ const Body = () => {
     if (!allRestaurents) return (<h2>No Restaurent Found!</h2>)
     if (allRestaurents.length > 0 && allFilteredRestaurents?.length === 0) {
         return (
-            <div>
+            <>
                 <Search setText={setText} />
-                <h2> No Restaurent Found!</h2>
-            </div>
+                <h2 className='mt-20 font-bold text-xl'> No Restaurent Found!</h2>
+            </>
         )
     }
     return (
-        (allFilteredRestaurents?.length === 0) ? <Shimmer /> :
-            (
-                <div className='container'>
-                    <div className='container-center'>
-                        <Search setText={setText} />
-                        <div className='restaurant-list'>
-                            {
-                                allFilteredRestaurents.map(restaurant => {
-                                    return <Link className='restaurant-card-link' to={'/restaurant/' + restaurant?.data?.id} key={restaurant.data.id}>
-                                        <RestaurantCard {...restaurant?.data} />
-                                    </Link>
-                                })
-                            }
-                        </div>
-                    </div>
-                </div>
-            )
+        <>
+            <Search setText={setText} />
+            <div className='grid 2xl:grid-cols-4 xl:grid-cols-3 sm:grid-cols-2 gap-4'>
+                {
+                    (allFilteredRestaurents?.length === 0) ? <Shimmer className='w-full' /> :
+                        allFilteredRestaurents.map(restaurant => {
+                            return <Link to={'/restaurant/' + restaurant?.data?.id} key={restaurant.data.id}>
+                                <RestaurantCard className='w-full' {...restaurant?.data} />
+                            </Link>
+                        })
+                }
+            </div>
+        </>
+
     )
 }
 export default Body
