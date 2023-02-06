@@ -48,7 +48,7 @@ const Body = () => {
                     (allFilteredRestaurents?.length === 0) ? <Shimmer className='w-full' /> :
                         allFilteredRestaurents.map(restaurant => {
                             return <Link to={'/restaurant/' + restaurant?.data?.id} key={restaurant.data.id}>
-                                <RestaurantCard className='w-full' {...restaurant?.data} />
+                                <RestaurantCard {...restaurant?.data} />
                             </Link>
                         })
                 }
