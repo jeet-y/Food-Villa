@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import Header from './components/Header'
 import About from './components/About'
@@ -8,19 +8,30 @@ import Footer from './components/Footer'
 import Error from './components/Error'
 import RestaurantMenu from './components/RestaurantMenu'
 import Instamart from './components/Instamart'
+import Cart from './components/Cart'
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
+import UserContext from './utils/UserContext'
+import { Provider } from 'react-redux'
+import store from './utils/store'
+
 
 const AppLayout = () => {
+    const [user, setUser] = useState({
+        name: "Jitedra yadav",
+        email: "jitendra.y@alivenow.in"
+    })
     return (
-        <div>
-            <Header />
-            <div className="w-full full-height flex justify-center">
-                <div className="w-3/4 xl:w-3/4 xl:px-16 2xl:w-2/3 px-8 full-height">
-                    <Outlet />
-                </div>
-            </div>
-            <Footer />
-        </div >
+        <Provider store={store}>
+            <UserContext.Provider
+                value={{
+                    user: user,
+                    setUser: setUser
+                }}>
+                <Header />
+                <Outlet />
+                <Footer />
+            </UserContext.Provider>
+        </Provider>
     )
 }
 
@@ -45,15 +56,17 @@ const BrowserRouter = createBrowserRouter([
             {
                 path: "/restaurant/:restaurantId",
                 element: <RestaurantMenu />
-            }
-            ,
+            },
             {
-                path: "/Instamart",
+                path: "/instamart",
                 element: <Instamart />
+            },
+            {
+                path: "/cart",
+                element: <Cart />
             }
         ]
     },
-
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

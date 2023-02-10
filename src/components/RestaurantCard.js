@@ -1,8 +1,11 @@
 import { Img_Restaurant_URL } from "../constant"
+// import { useContext } from 'react'
+// import UserContext from "../utils/UserContext"
 
-const RestaurantCard = ({ cloudinaryImageId, name, cuisines, avgRating, slaString, costForTwoString, aggregatedDiscountInfo }) => {
+const RestaurantCard = ({ cloudinaryImageId, name, id, cuisines, avgRating, slaString, costForTwoString, aggregatedDiscountInfo }) => {
+    // const { user } = useContext(UserContext);
     return (
-        <div className="grid-cols-3 p-4 mt-8 hover:border -m-3">
+        <div className="p-4 hover:border" key={id}>
             <img src={Img_Restaurant_URL + cloudinaryImageId} alt="restaurant Image" />
             <h3 className="font-semibold text-slate-700 mt-3">{name}</h3>
             <p p className="font-light text-xs text-slate-500" > {cuisines.join(", ")}</p >
@@ -13,7 +16,8 @@ const RestaurantCard = ({ cloudinaryImageId, name, cuisines, avgRating, slaStrin
             </div>
             <hr></hr>
             <p className="text-[#8a584b] text-sm mt-4">{aggregatedDiscountInfo.shortDescriptionList[0].meta}</p>
-        </div >
+            {/* <div className="font-bold">{user.name} - {user.email}</div> */}
+        </div>
     )
 }
 
