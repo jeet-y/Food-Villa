@@ -17,7 +17,7 @@ import store from './utils/store'
 
 const AppLayout = () => {
     const [user, setUser] = useState({
-        name: "Jitedra yadav",
+        name: "JY",
         email: "jitendra.y@alivenow.in"
     })
     return (

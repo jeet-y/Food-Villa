@@ -4,16 +4,17 @@ import { Img_Restaurant_URL } from '../constant'
 import rm from './RestaurantMenu.module.css'
 import { useDispatch } from "react-redux";
 import { addItem } from "../utils/cartSlice";
+import RestaurentBanner from './RestaurentBanner'
+import { RestaurantMenuBannerShimmer, RestaurantMenuItems } from './Shimmer'
 
 const RestaurantMenu = () => {
-    let initialFoodItemCount = 1;
     const { restaurantId } = useParams();
     const [restaurant, setRestaurent] = useState(null);
     const [isAddFoodItemBtnActive, setIsAddFoodItemBtnActive] = useState(false)
-    const [foodItemCount, setfoodItemCount] = useState(initialFoodItemCount);
     const dispath = useDispatch();
 
     const addFoodItem = (item) => {
+        item.noOfItem = 1;
         dispath(addItem(item));
     }
 
@@ -25,77 +26,51 @@ const RestaurantMenu = () => {
     useEffect(() => {
         getRestaurantInfo();
     }, [])
-    if (!restaurant) return null;
+    if (!restaurant) {
+        return (
+            <div className={rm.container}>
+                <RestaurantMenuBannerShimmer />
+                <div className="w-full flex justify-center mt-10">
+                    <div className="w-1/3 text-gray-800 p-5">
+                        <RestaurantMenuItems />
+
+                    </div>
+                </div>
+            </div>
+        )
+    }
     return (
-        (!restaurant) ? <h1>Restaurant Loading...</h1>
-            : (
-                <div className={rm.container}>
-                    <div className={rm.selected_restaurant}>
-                        <div className={rm.selected_restaurant_center}>
-                            <img src={Img_Restaurant_URL + restaurant?.cloudinaryImageId} />
-                            <div className={rm.info}>
-                                <h3 className={rm.name}>{restaurant?.name}</h3>
-                                <p className={rm.cuisines}>{restaurant?.cuisines.join(", ")}</p>
-                                <p className={rm.area}>{restaurant?.locality}, {restaurant?.area}</p>
-                                <div className={rm.extraInfo}>
-                                    <div className={rm.subExtraInfo}>
-                                        <div><i className="fa fa-star" aria-hidden="true"></i>  {restaurant?.avgRatingString}</div>
-                                        <div>{restaurant?.totalRatingsString}</div>
-                                    </div>
-                                    <div></div>
-                                    <div className={rm.subExtraInfo}>
-                                        <div> {restaurant?.sla.slaString?.toLowerCase()}</div>
-                                        <div>Delivery Time</div>
-                                    </div>
-                                    <div></div>
-                                    <div className={rm.subExtraInfo}>
-                                        <div><span>&#8377;</span>  {Math.round(restaurant?.costForTwo / 100).toString()}</div>
-                                        <div>Cost for two</div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div className="w-full flex justify-center mt-10">
-                        <div className="w-1/3 text-gray-800 p-5">
-                            {Object.values(restaurant?.menu?.items).map((item) =>
-                                (!item.cloudinaryImageId) ? '' :
-                                    (
-                                        <div key={item?.id} >
-                                            <div className="mt-12" >
-                                                <div className="flex justify-between h-32">
-                                                    <div className="w-3/4">
-                                                        <p className="mt-4 font-bold">{item?.name}</p>
-                                                        <p className="text-sm"><span>&#8377;</span> {Math.round(item?.price / 100).toString()}</p>
-                                                        <p className="mt-4 text-sm font-light text-gray-400">{item?.description}</p>
-                                                    </div>
-                                                    <div className="flex flex-col relative">
-                                                        <img className="h-20 rounded object-center" src={Img_Restaurant_URL + item?.cloudinaryImageId} />
-                                                        {
-                                                            (!isAddFoodItemBtnActive) ?
-                                                                <button className="addItemBtn1"
-                                                                    onClick={() => { addFoodItem(item); setIsAddFoodItemBtnActive(true); }}>
-                                                                    ADD</button>
-                                                                :
-                                                                <div className="addItemBtn1">
-                                                                    <button onClick={() => { (foodItemCount > 1) ? setfoodItemCount(foodItemCount - 1) : setfoodItemCount(foodItemCount) }}>-</button>
-                                                                    <p className='text-xs text-green-600'>{foodItemCount}</p>
-                                                                    <button className='text-green-600 font-md text-base' onClick={() => setfoodItemCount(foodItemCount + 1)}>+</button>
-                                                                </div>
-                                                        }
-
-                                                    </div>
-                                                </div>
+        <div className={rm.container}>
+            <RestaurentBanner {...restaurant} />
+            <div className="w-full flex justify-center mt-10">
+                <div className="w-1/3 text-gray-800 p-5">
+                    {Object.values(restaurant?.menu?.items).map((item) =>
+                        (!item.cloudinaryImageId) ? '' :
+                            (
+                                <div key={item?.id} >
+                                    <div className="mt-12" >
+                                        <div className="flex justify-between h-32">
+                                            <div className="w-3/4">
+                                                <p className="mt-4 font-bold">{item?.name}</p>
+                                                <p className="text-sm"><span>&#8377;</span> {Math.round(item?.price / 100).toString()}</p>
+                                                <p className="mt-4 text-sm font-light text-gray-400">{item?.description}</p>
                                             </div>
-                                            <div className="border-b mt-10"></div>
+                                            <div className="flex flex-col relative">
+                                                <img className="h-20 rounded object-center" src={Img_Restaurant_URL + item?.cloudinaryImageId} />
+                                                <button className="addItemBtn1"
+                                                    onClick={() => { addFoodItem(item) }}>
+                                                    ADD</button>
+                                            </div>
                                         </div>
-                                    )
-                            )}
-                        </div>
-                    </div>
+                                    </div>
+                                    <div className="border-b mt-10"></div>
+                                </div >
+                            )
+                    )}
                 </div >
-            )
+            </div >
+        </div >
+
     )
 }
 
@@ -104,3 +79,16 @@ export default RestaurantMenu;
 
 
 // https://www.swiggy.com/dapi/menu/v4/full?lat=12.978189262657288&lng=77.63857003301383&menuId=262385
+
+{/* {
+    (!isAddFoodItemBtnActive) ?
+        <button className="addItemBtn1"
+            onClick={() => { addFoodItem(item); setIsAddFoodItemBtnActive(true); }}>
+            ADD</button>
+        :
+        <div className="addItemBtn1">
+            <button onClick={() => { (foodItemCount > 1) ? setfoodItemCount(foodItemCount - 1) : setfoodItemCount(foodItemCount) }}>-</button>
+            <p className='text-xs text-green-600'>{foodItemCount}</p>
+            <button className='text-green-600 font-md text-base' onClick={() => setfoodItemCount(foodItemCount + 1)}>+</button>
+        </div>
+} */}

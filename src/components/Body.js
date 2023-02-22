@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import RestaurantCard from './RestaurantCard'
-import Shimmer from './Shimmer';
+import { HomeShimmer } from './Shimmer';
 import Search from './Search';
 import { Link } from 'react-router-dom';
 // import UserContext from '../utils/UserContext';
@@ -14,13 +14,12 @@ const Body = () => {
     const [searchText, setSearchText] = useState("");
     const [allRestaurents, setAllRestaurents] = useState([])
     const [allFilteredRestaurents, setAllFilteredRestaurents] = useState([])
-    // const { user, setUser } = useContext(UserContext);
 
     const setText = (text) => {
         setSearchText(text)
     }
     async function getAllRestaurents() {
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9783692&lng=77.6408356&page_type=DESKTOP_WEB_LISTING");
+        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.978189262657288&lng=77.63857003301383&page_type=DESKTOP_WEB_LISTING");
         const json = await data?.json();
         setAllRestaurents(json?.data?.cards[2]?.data?.data?.cards);
         setAllFilteredRestaurents(json?.data?.cards[2]?.data?.data?.cards);
@@ -62,7 +61,7 @@ const Body = () => {
                 <Search setText={setText} />
                 <div className='grid xl:grid-cols-4 sm:grid-cols-3 2xl:gap-4 gap-2 mt-4'>
                     {
-                        (allFilteredRestaurents?.length === 0) ? <Shimmer className='w-full' /> :
+                        (allFilteredRestaurents?.length === 0) ? <HomeShimmer className='w-full' /> :
                             allFilteredRestaurents.map(restaurant => {
                                 return (
                                     <Link
